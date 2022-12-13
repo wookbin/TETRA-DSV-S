@@ -1,0 +1,31 @@
+<launch>
+
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="192.168.1.224"/>
+    <param name="msop_port" value="2371"/>
+    <param name="difop_port" value="2370"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="agreement_type" value="2"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="pcap" value="$(find lslidar_n301_driver)/pcap/3.pcap"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="agreement_type" value="2"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="min_range" value="0.0"/>
+    <param name="max_range" value="100.0"/>
+    <param name="frequency" value="10.0"/>
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+    <param name="filter_scan_point" value="true"/>
+  </node>
+  
+  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find lslidar_n301_decoder)/launch/lslidar_n301.rviz" output="screen"/-->
+
+</launch>

@@ -1,0 +1,387 @@
+<launch>
+<arg name="devIP1" value="192.168.1.200" />
+<arg name="devIP2" value="192.168.1.201" />
+<arg name="devIP3" value="192.168.1.202" />
+<arg name="devIP4" value="192.168.1.203" />
+<arg name="devIP5" value="192.168.1.204" />
+<arg name="devIP6" value="192.168.1.205" />
+<arg name="devIP7" value="192.168.1.206" />
+<arg name="devIP8" value="192.168.1.207" />
+<arg name="devIP9" value="192.168.1.208" />
+<arg name="devIP10" value="192.168.1.209" />
+<arg name="devIP11" value="192.168.1.210" />
+<arg name="devIP12" value="192.168.1.211" />
+<arg name="lidar_serial_number_1" value="1000" />
+<arg name="lidar_serial_number_2" value="1001" />
+<arg name="lidar_serial_number_3" value="1002" />
+<arg name="lidar_serial_number_4" value="1003" />
+<arg name="lidar_serial_number_5" value="1004" />
+<arg name="lidar_serial_number_6" value="1005" />
+<arg name="lidar_serial_number_7" value="1006" />
+<arg name="lidar_serial_number_8" value="1007" />
+<arg name="lidar_serial_number_9" value="1008" />
+<arg name="lidar_serial_number_10" value="1009" />
+<arg name="lidar_serial_number_11" value="1010" />
+<arg name="lidar_serial_number_12" value="1011" />
+
+<arg name="msop_port1" value="2368" />
+<arg name="devPort1" value="2369" />
+<arg name="msop_port2" value="2370" />
+<arg name="devPort2" value="2371" />
+<arg name="msop_port3" value="2372" />
+<arg name="devPort3" value="2373" />
+<arg name="msop_port4" value="2374" />
+<arg name="devPort4" value="2375" />
+<arg name="msop_port5" value="2376" />
+<arg name="devPort5" value="2377" />
+<arg name="msop_port6" value="2378" />
+<arg name="devPort6" value="2379" />
+<arg name="msop_port7" value="2380" />
+<arg name="devPort7" value="2381" />
+<arg name="msop_port8" value="2382" />
+<arg name="devPort8" value="2383" />
+<arg name="msop_port9" value="2384" />
+<arg name="devPort9" value="2385" />
+<arg name="msop_port10" value="2386" />
+<arg name="devPort10" value="2387" />
+<arg name="msop_port11" value="2388" />
+<arg name="devPort11" value="2389" />
+<arg name="msop_port12" value="2390" />
+<arg name="devPort12" value="2391" />
+
+<group ns="Lidar1">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP1)"/>
+    <param name="msop_port" value="$(arg msop_port1)" />
+    <param name="difop_port" value="$(arg devPort1)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_1)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar2">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP2)"/>
+    <param name="msop_port" value="$(arg msop_port2)" />
+    <param name="difop_port" value="$(arg devPort2)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_2)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar3">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP3)"/>
+    <param name="msop_port" value="$(arg msop_port3)" />
+    <param name="difop_port" value="$(arg devPort3)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_3)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+ 
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar4">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP4)"/>
+    <param name="msop_port" value="$(arg msop_port4)" />
+    <param name="difop_port" value="$(arg devPort4)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_4)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar5">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP5)"/>
+    <param name="msop_port" value="$(arg msop_port5)" />
+    <param name="difop_port" value="$(arg devPort5)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_5)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar6">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP6)"/>
+    <param name="msop_port" value="$(arg msop_port6)" />
+    <param name="difop_port" value="$(arg devPort6)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_6)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar7">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP7)"/>
+    <param name="msop_port" value="$(arg msop_port7)" />
+    <param name="difop_port" value="$(arg devPort7)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_7)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar8">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP8)"/>
+    <param name="msop_port" value="$(arg msop_port8)" />
+    <param name="difop_port" value="$(arg devPort8)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_8)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar9">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP9)"/>
+    <param name="msop_port" value="$(arg msop_port9)" />
+    <param name="difop_port" value="$(arg devPort9)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_9)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar10">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP10)"/>
+    <param name="msop_port" value="$(arg msop_port10)" />
+    <param name="difop_port" value="$(arg devPort10)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_10)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group>  
+
+<group ns="Lidar11">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP11)"/>
+    <param name="msop_port" value="$(arg msop_port11)" />
+    <param name="difop_port" value="$(arg devPort11)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_11)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group> 
+
+<group ns="Lidar12">
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" launch-prefix="xterm -e">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="$(arg devIP12)"/>
+    <param name="msop_port" value="$(arg msop_port12)" />
+    <param name="difop_port" value="$(arg devPort12)"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="lidar_serial_number" value="$(arg lidar_serial_number_12)"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="frequency" value="10.0"/>
+    
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+</group> 
+
+</launch>

@@ -1,0 +1,56 @@
+<launch>
+
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" ns="LeftLidar">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="192.168.1.222"/>
+    <param name="msop_port" value="2368"/>
+    <param name="difop_port" value="2369"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen" ns="LeftLidar">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="min_range" value="0.3"/>
+    <param name="max_range" value="100.0"/>
+    <param name="frequency" value="10.0"/>
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+  
+  <!--node pkg="tf" type="static_transform_publisher" name="base_link2laser" args="0 0 0 0 0 0 world laser_link 100" /-->
+
+  <node pkg="lslidar_n301_driver" type="lslidar_n301_driver_node" name="lslidar_n301_driver_node" output="screen" ns="RightLidar">
+    <param name="frame_id" value="laser_link"/>
+    <param name="device_ip" value="192.168.1.222"/>
+    <param name="msop_port" value="2366"/>
+    <param name="difop_port" value="2367"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+  </node>
+
+  <node pkg="lslidar_n301_decoder" type="lslidar_n301_decoder_node" name="lslidar_n301_decoder_node" output="screen" ns="RightLidar">
+    <param name="child_frame_id" value="laser_link"/>
+    <param name="point_num" value="2000"/>
+    <param name="start_angle" value="0"/>
+    <param name="end_angle" value="360"/>
+    <param name="min_range" value="0.3"/>    
+    <param name="agreement_type" value="1"/>    <!--  1-1.7协议   2-1.6协议   -->
+    <param name="max_range" value="100.0"/>
+    <param name="frequency" value="10.0"/>
+    <param name="use_gps_ts" value="false"/>
+    <param name="gps_correct" value="true"/>
+    <param name="publish_point_cloud" value="true"/>
+	<param name="filter_scan_point" value="true"/>
+  </node>
+
+    <node pkg="tf" type="static_transform_publisher" name="base_link2laser" args="3 0 0 0 0 0 map laser_link 100" />
+    <node pkg="tf" type="static_transform_publisher" name="base_link2laser2" args="0 0 10 0 0 0 map laser_link 100" />
+
+</launch>
