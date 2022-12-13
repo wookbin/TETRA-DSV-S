@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <name>rviz_virtual_wall_custom</name>
+  <version>0.0.1</version>
+  <description>The Plugin of Rviz for Virtual wall Tool</description>
+
+
+  <maintainer email="wbjin@hyulimrobot.com">wbjin</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+
+  <build_depend>qtbase5-dev</build_depend>
+  <build_depend>rviz</build_depend>
+
+  <run_depend>libqt5-core</run_depend>
+  <run_depend>libqt5-gui</run_depend>
+  <run_depend>libqt5-widgets</run_depend>
+  <run_depend>rviz</run_depend>
+
+
+<export>
+    <rviz plugin="${prefix}/plugin_description.xml"/>
+</export>
+</package>
