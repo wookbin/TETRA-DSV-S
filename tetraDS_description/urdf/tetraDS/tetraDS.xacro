@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+
+<robot name="tetraDS" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Define a number of dimensions using properties -->
+  <xacro:property name="base_length" value="0.485" />
+  <xacro:property name="base_radius" value="0.2365" />
+  <xacro:property name="PI" value="3.1415926" />
+
+  <xacro:macro name="cylinder_inertia" params="m r h">
+        <inertia ixx="${m*(3*r*r+h*h)/12}" ixy="0" ixz="0" iyy="${m*(3*r*r+h*h)/12}" iyz="0" izz="${m*r*r/2}" />
+  </xacro:macro>
+
+   <!-- Include all component files -->
+   <xacro:include filename="$(find tetraDS_description)/urdf/tetraDS/materials.urdf.xacro" />
+   <xacro:include filename="$(find tetraDS_description)/urdf/tetraDS/base.urdf.xacro" />
+   
+   <!-- Add the base and wheels -->
+   <base name="base" color="Black"/>
+  
+  <link name="laser_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="base_link_to_laser_link" type="fixed">
+    <origin xyz="0.085 0 0.251" rpy="0 0 1.5708" />
+    <parent link="base_link"/>
+    <child link="laser_link" />
+  </joint>
+
+  <link name="laser_link2">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="base_link_to_laser_link2" type="fixed">
+    <origin xyz="-0.318 0 0.2553" rpy="0 0 ${PI}" />
+    <parent link="base_link"/>
+    <child link="laser_link2" />
+  </joint>
+
+  <link name="imu_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="base_link_to_imu_link" type="fixed">
+    <origin xyz="0.0 0 0.232" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="imu_link" />
+  </joint>
+
+ <link name="usb_cam">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="usb_cam" type="fixed">
+    <origin xyz="0.135 0.0 0.181" rpy="1.5708 3.14159 1.5708"/>
+    <parent link="base_link"/>
+    <child link="usb_cam" />
+  </joint>  
+
+
+ <link name="Front_bumper">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.43 0.01" />
+        </geometry>
+        <material name="TransparentBlack" />
+      </visual>
+  </link>
+
+  <joint name="Front_bumper" type="fixed">
+    <origin xyz="0.15125 0.0 -0.05" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="Front_bumper" />
+  </joint>
+
+
+ <link name="sonar_DL">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="sonar_DL" type="fixed">
+    <origin xyz="-0.250 0.215 -0.0149" rpy="0 0 1.5708" />
+    <parent link="base_link"/>
+    <child link="sonar_DL" />
+  </joint>
+
+ <link name="sonar_RL">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="sonar_RL" type="fixed">
+    <origin xyz="-0.295 0.170 -0.0149" rpy="0 0 3.14" />
+    <parent link="base_link"/>
+    <child link="sonar_RL" />
+  </joint>
+
+ <link name="sonar_RR">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="sonar_RR" type="fixed">
+    <origin xyz="-0.295 -0.170 -0.0149" rpy="0 0 3.14" />
+    <parent link="base_link"/>
+    <child link="sonar_RR" />
+  </joint>
+
+ <link name="sonar_DR">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="sonar_DR" type="fixed">
+    <origin xyz="-0.250 -0.215 -0.0149" rpy="0 0 -1.5708" />
+    <parent link="base_link"/>
+    <child link="sonar_DR" />
+  </joint>
+
+ <link name="camera1_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="camera1_link" type="fixed">
+    <origin xyz="0.1347 0.0 0.1344" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="camera1_link" />
+  </joint>
+
+ <link name="camera2_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+  </link>
+
+  <joint name="camera2_link" type="fixed">
+    <origin xyz="-0.3118 0.0 0.1985" rpy="0 0 ${PI}" />
+    <parent link="base_link"/>
+    <child link="camera2_link" />
+  </joint>
+
+
+ <link name="base_Upperlink">
+   <visual>
+    <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tetraDS_description/meshes/Platform Body_U.STL" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="DarkGrey"/>        
+    </visual>
+      <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="${base_length}" radius="${base_radius}"/>
+            </geometry>
+      </collision>
+  </link>
+
+  <joint name="base_Upperlink" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="base_Upperlink" />
+  </joint>
+
+
+</robot>
+
+
+
