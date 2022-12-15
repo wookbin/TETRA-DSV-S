@@ -1601,7 +1601,12 @@ bool Goto_Command(tetraDS_service::gotolocation::Request &req,
     m_flag_setgoal = true;
 
     //costmap clear call//
-    clear_costmap_client.call(m_request);
+    m_flag_clesr_costmap_call = clear_costmap_client.call(m_request);
+    while(!m_flag_clesr_costmap_call)
+    {
+	sleep(1);
+    }
+    m_flag_clesr_costmap_call = false;
 
     LED_Toggle_Control(1,3,100,3,1);
     if(_pFlag_Value.m_bflag_patrol)
@@ -1673,7 +1678,12 @@ bool Goto_Command2(tetraDS_service::gotolocation2::Request &req,
     m_flag_setgoal = true;
 
     //costmap clear call//
-    clear_costmap_client.call(m_request);
+    m_flag_clesr_costmap_call = clear_costmap_client.call(m_request);
+    while(!m_flag_clesr_costmap_call)
+    {
+	sleep(1);
+    }
+    m_flag_clesr_costmap_call = false;
 
     _pGoal_pose.goal_positionX = req.goal_positionX;
     _pGoal_pose.goal_positionY = req.goal_positionY;
@@ -3682,7 +3692,12 @@ bool Goto_Conveyor_Command(tetraDS_service::gotoconveyor::Request &req,
 	bool bResult = false;
 
     //costmap clear call//
-    clear_costmap_client.call(m_request);
+    m_flag_clesr_costmap_call = clear_costmap_client.call(m_request);
+    while(!m_flag_clesr_costmap_call)
+    {
+	sleep(1);
+    }
+    m_flag_clesr_costmap_call = false;
 
     LED_Toggle_Control(1, 3,100,3,1);
     LED_Turn_On(45); //sky_blue
