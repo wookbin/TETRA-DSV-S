@@ -1564,7 +1564,7 @@ bool Depart_Station2Move()
 {
     bool bResult = false;
     geometry_msgs::TwistPtr cmd(new geometry_msgs::Twist());
-    
+ 
     if(_pAR_tag_pose.m_transform_pose_x <= 0.6) //600mm depart move
     {
         if(_pFlag_Value.m_bFlag_Obstacle_cygbot)
@@ -1576,10 +1576,33 @@ bool Depart_Station2Move()
         }
         else
         {
-            cmd->linear.x =  -0.05; 
-            cmd->angular.z = 0.0;
-            cmdpub_.publish(cmd);
-            bResult = false;
+            if(m_iDepart_Station2Move_cnt >= 800)
+            {
+                cmd->linear.x =  0.0; 
+                cmd->angular.z = 0.0;
+                cmdpub_.publish(cmd);
+                bResult = false;
+
+                m_iDepart_Station2Move_cnt = 0;
+                printf("[Error]Depart_Station2Move Fail \n");
+                printf("_pAR_tag_pose.m_transform_pose_x : %.3f || _pFlag_Value.m_bFlag_Obstacle_cygbot: %d \n",_pAR_tag_pose.m_transform_pose_x, _pFlag_Value.m_bFlag_Obstacle_cygbot);
+                
+                //Log write//
+                m_strLog = "Depart_Station2Move Fail";
+                m_strLog_data_1 = to_string(_pAR_tag_pose.m_transform_pose_x);
+                m_strLog_data_2 = to_string(_pFlag_Value.m_bFlag_Obstacle_cygbot);
+                Error_Log_write(m_strLog + "|" + m_strLog_data_1 + "|" + m_strLog_data_2);
+
+            }
+            else
+            {
+                cmd->linear.x =  -0.05; 
+                cmd->angular.z = 0.0;
+                cmdpub_.publish(cmd);
+                bResult = false;
+                
+                m_iDepart_Station2Move_cnt++;
+            }
         }
             
     }
@@ -1589,11 +1612,13 @@ bool Depart_Station2Move()
         cmd->angular.z = 0.0;
         cmdpub_.publish(cmd);
 
+        ex_iDocking_CommandMode = 0;
+        m_iDepart_Station2Move_cnt = 0;
+
         //add goto cmd call//
         setGoal(goal);
 
         bResult = true;
-        ex_iDocking_CommandMode = 0;
     }
     
     return bResult;
