@@ -4398,12 +4398,18 @@ void *AutoThread_function(void *data)
 //add _ GUI Button callback fuction...
 void RVIZ_GUI_Callback(const std_msgs::String::ConstPtr& msg)
 {
+    geometry_msgs::TwistPtr cmd(new geometry_msgs::Twist());
+
     if(msg->data == "STOP") //Stop...
     {
         goto_goal_id.id = "";
         ROS_INFO("Goto Cancel call !");
         GotoCancel_pub.publish(goto_goal_id);
         ex_iDocking_CommandMode = 0;
+
+        cmd->linear.x =  0.0; 
+        cmd->angular.z = 0.0;
+        cmdpub_.publish(cmd);
     }
 
     if(msg->data == "GETDB") //Read JSON file...
