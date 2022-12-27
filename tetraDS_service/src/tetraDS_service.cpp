@@ -1612,11 +1612,11 @@ bool Depart_Station2Move()
         cmd->angular.z = 0.0;
         cmdpub_.publish(cmd);
 
-        ex_iDocking_CommandMode = 0;
-        m_iDepart_Station2Move_cnt = 0;
-
         //add goto cmd call//
         setGoal(goal);
+	    
+        ex_iDocking_CommandMode = 0;
+        m_iDepart_Station2Move_cnt = 0;
 
         bResult = true;
     }
