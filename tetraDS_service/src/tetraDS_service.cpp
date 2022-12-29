@@ -1564,9 +1564,6 @@ bool Depart_Station2Move()
 {
     bool bResult = false;
     geometry_msgs::TwistPtr cmd(new geometry_msgs::Twist());
-    printf("_pAR_tag_pose.m_transform_pose_x : %.3f || _pFlag_Value.m_bFlag_Obstacle_cygbot: %d \n",
-            _pAR_tag_pose.m_transform_pose_x, _pFlag_Value.m_bFlag_Obstacle_cygbot);         
- 
     if(_pAR_tag_pose.m_transform_pose_x <= 0.6) //600mm depart move
     {
         if(_pFlag_Value.m_bFlag_Obstacle_cygbot)
