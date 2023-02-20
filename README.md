@@ -5,4 +5,4 @@ S model
 
 [install list]
 
-sudo apt install rapidjson-dev1
+sudo apt-get install rapidjson-dev
